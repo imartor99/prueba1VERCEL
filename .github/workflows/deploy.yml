@@ -1,0 +1,87 @@
+name: CI/CD - App Web y Documentación
+
+on:
+  push:
+    branches:
+      - main
+      - develop # Se ejecuta en la rama de desarrollo
+  pull_request:
+    branches:
+      - main
+      - develop
+
+# Job 1: CI (Integración Continua - Pruebas)
+jobs:
+  ci_tests:
+    name: 1. CI - Ejecutar Pruebas Unitarias
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js (v18) y Cachear Dependencias
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm' 
+
+      - name: Instalar dependencias (incluye JSDoc)
+        run: npm install
+        
+      # CRÍTICO: Si las pruebas fallan, el flujo se detiene aquí.
+      - name: Ejecutar Pruebas Unitarias (npm run test)
+        run: npm run test
+        
+  # Job 2: BUILD (Generación de Documentación)
+  # Este Job SÓLO se ejecuta si 'ci_tests' es exitoso.
+  build_docs:
+    name: 2. BUILD - Generar Documentación Técnica
+    runs-on: ubuntu-latest
+    needs: [ci_tests] # Dependencia: Las pruebas deben pasar primero
+    
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+        
+      - name: Instalar dependencias
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm' 
+          
+      - name: npm install
+        run: npm install
+
+      # Asigna permisos de ejecución para JSDoc
+      - name: Asignar Permisos a JSDoc
+        run: chmod +x node_modules/.bin/jsdoc 
+      
+      # Genera la carpeta 'docs' en el directorio de trabajo del runner
+      - name: Generar la documentación (npm run docs)
+        run: npm run docs
+        
+      # La carpeta 'docs' generada se mantiene lista para el siguiente Job
+
+  # Job 3: CD (Despliegue Continuo)
+  # Este Job SÓLO se ejecuta si 'build_docs' es exitoso.
+  cd_deploy:
+    name: 3. CD - Despliegue de la Aplicación Principal
+    runs-on: ubuntu-latest
+    needs: [build_docs] # Dependencia: El build de documentación debe ser exitoso
+    
+    steps:
+      # Volvemos a hacer Checkout para asegurar que tenemos la carpeta 'docs' generada 
+      # en el Job anterior y el resto de los archivos del proyecto.
+      - name: Checkout del repositorio (Para despliegue final)
+        uses: actions/checkout@v4
+        
+      - name: Despliegue de la APLICACIÓN COMPLETA en Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }} 
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          # CRÍTICO: Apuntamos al directorio raíz (./) para que la app principal (index.html)
+          # sea la que se muestre al usuario. La documentación estará en /docs/index.html.
+          working-directory: ./ 
