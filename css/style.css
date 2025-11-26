@@ -1,0 +1,161 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 300;
+  margin-bottom: 40px;
+  color: #444;
+}
+
+.icono-cabecera {
+  text-align: center;
+  font-size: 48px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.contenedor {
+  display: flex;
+  gap: 50px;
+  width: 100%;
+  max-width: 1000px;
+  justify-content: center;
+}
+
+.seccion {
+  flex: 1;
+}
+
+h2 {
+  font-weight: 300;
+  color: #999;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+/* Form estilos */
+.grupo-formulario {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #666;
+  font-size: 0.9em;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.fila {
+  display: flex;
+  gap: 15px;
+}
+
+.fila .grupo-formulario {
+  flex: 1;
+}
+
+button#btn-anadir-libro {
+  width: 100%;
+  padding: 12px;
+  background-color: #ccc;
+  border: none;
+  color: #666;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+button#btn-anadir-libro:hover {
+  background-color: #bbb;
+}
+
+/* Lista estilos */
+#lista-lectura {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.item-libro {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-libro:last-child {
+  border-bottom: none;
+}
+
+.info-libro h3 {
+  margin: 0 0 5px 0;
+  font-size: 1em;
+  font-weight: 500;
+  color: #444;
+}
+
+.info-libro p {
+  margin: 0;
+  font-size: 0.85em;
+  color: #888;
+}
+
+.estado-libro {
+  font-size: 0.85em;
+  color: #aaa;
+  text-align: right;
+}
+
+.estado-leido {
+  color: #aaa;
+}
+
+.estado-no-leido {
+  color: #aaa;
+}
+
+.btn-marcar-leido {
+  background: none;
+  border: 1px solid #ddd;
+  padding: 5px 10px;
+  border-radius: 3px;
+  color: #666;
+  cursor: pointer;
+  font-size: 0.8em;
+  margin-left: 10px;
+}
+
+.btn-marcar-leido:hover {
+  background-color: #f9f9f9;
+}
+
+.contador-libros {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: #888;
+}

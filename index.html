@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Reading List</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="icono-cabecera">◎</div>
+    <h1>The Reading List</h1>
+
+    <div class="contenedor">
+      <!-- Bloque Izquierdo: Formulario de Añadir Libro -->
+      <div class="seccion">
+        <h2>Libro</h2>
+
+        <div class="grupo-formulario">
+          <label for="titulo">Título</label>
+          <input type="text" id="titulo" placeholder="Título del libro" />
+        </div>
+
+        <div class="fila">
+          <div class="grupo-formulario">
+            <label for="autor">Autor</label>
+            <input type="text" id="autor" placeholder="Autor" />
+          </div>
+          <div class="grupo-formulario">
+            <label for="genero">Género</label>
+            <input type="text" id="genero" placeholder="Género" />
+          </div>
+        </div>
+
+        <button id="btn-anadir-libro">Añadir Libro</button>
+      </div>
+
+      <!-- Bloque Derecho: Lista de Lectura -->
+      <div class="seccion">
+        <h2>Mi Lista de Lectura</h2>
+        <ul id="lista-lectura">
+          <!-- Libros se añadirán dinámicamente aquí -->
+        </ul>
+        <div class="contador-libros" id="contador-libros">
+          Libros leídos: 0 de 0
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="js/main6.js"></script>
+  </body>
+</html>
