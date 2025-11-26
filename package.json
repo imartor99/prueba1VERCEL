@@ -1,10 +1,12 @@
 {
   "name": "prueba1",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "App de Lista de Lectura",
+  "main": "js/main6.js",
+  "type":"module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node tests/booklist.test.js",
+    "docs": "jsdoc -r js -d docs"
   },
   "keywords": [],
   "author": "",
